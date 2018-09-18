@@ -2,10 +2,15 @@
 
 return [
 
-    'addcontact' => 'കോൺടാക്റ്റ് ചേർക്കുക.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
-
+    'addcontact' => 'കോൺടാക്റ്റ് ചേർക്കുക',
+    'name' => 'പേര്',
+    'email' => 'ഇമെയിൽ',
+    'phone' => 'ഫോൺ',
+    'address' => "വിലാസം",
+    'action' => "ഓപ്ഷനുകൾ",
+    'details' => "contact വിശദാംശങ്ങൾ",
+    'changephoto' => "ചിത്രം മാറ്റുക",
+    'edit' => "Contact എഡിറ്റ് ചെയ്യുക",
+    'allcontacts' => "എല്ലാ കോൺടാക്റ്റുകളും",
+    'app' => "ഫോൺബൂക് "
 ];

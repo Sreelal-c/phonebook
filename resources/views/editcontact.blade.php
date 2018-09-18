@@ -25,11 +25,7 @@
                         <input type="text" value="{{$contact->name}}" class="form-control" id="name" value="{{ old('name') }}"  name="name" aria-describedby="nameHelp" placeholder="Enter Full Name">
                         <small id="nameHelp" class="form-text text-muted">Enter the full name</small>
                 </div>
-                <div class="form-group">
-                        <label for="exampleInputEmail1">Phone</label>
-                        <input type="text" value="{{$contact->phone}}" class="form-control" id="phone" value="{{ old('phone') }}" name="phone" aria-describedby="phoneHelp" placeholder="Enter Phone Number">
-                        <small id="phoneHelp" class="form-text text-muted">Enter Phone number with country code.</small>
-                </div>
+                
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input type="email" value="{{$contact->email}}" class="form-control" id="exampleInputEmail1" value="{{ old('email') }}" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -46,11 +42,24 @@
                         <input value="{{$contact->nickname}}" type="text" class="form-control" value="{{ old('name') }}" id="nickname" name="nickname" aria-describedby="nicknameHelp" placeholder="Enter Nick Name">
                         <small id="nicknameHelp" class="form-text text-muted">Enter the Nick name</small>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Phone 2</label>
-                <input type="text" value="{{$contact->alt_phone}}" class="form-control" id="phonealt" value="{{ old('phonealt') }}" name="phonealt" aria-describedby="phone2Help" placeholder="Alternate Numbers">
-                <small id="phone2Help" class="form-text text-muted">Enter Phone number with country code.</small>
+        <div class="form-group row multiple-form-group">
+                      <label>Phone Numbers</label>
+                      
+                        <input class="form-control" id="features" type="text"  name="phoneno[]" required>
+                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
+						</button></span>
+                      
+        </div>
+        @foreach($contact->phone as $row)
+           <div class="form-group row multiple-form-group">
+                      <label>Phone Numbers</label>
+                      
+                        <input class="form-control" id="features" type="text" value="{{$row->phone}}" name="phoneno[]" required>
+                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
+						</button></span>
+                      
             </div>
+            @endforeach
             <div class="form-group">
               <label for="job">Job/ Designation</label>
               <input type="text" value="{{$contact->job}}" class="form-control" value="{{ old('job') }}" id="job" name="job" aria-describedby="jobHelp" placeholder="Enter Job/Designation">

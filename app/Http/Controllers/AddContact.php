@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Contact;
+use App\Phone;
 
 class AddContact extends Controller
 {
@@ -27,16 +28,16 @@ class AddContact extends Controller
     {   
         $this->validate(request(), [
             'name' => 'required',
-            'phone' => 'required',
-            'email' => 'unique:contacts',
+            'phoneno' => 'required',
+            'email' => 'sometimes  | nullable | unique:contacts',
         ]);
 
         $contact = new Contact;
         
         $contact->name = request('name');
         $contact->nick_name = request('nickname');
-        $contact->phone = request('phone');
-        $contact->alt_phone = request('phonealt');
+        //$contact->phone = request('phone');
+        //$contact->alt_phone = request('phonealt');
         $contact->email = request('email');
         $contact->address = request('address');
         $contact->comments = request('comments');  
@@ -45,6 +46,16 @@ class AddContact extends Controller
         $contact->is_friend = request('known');
         $contact->save();
         $id = $contact->id;
+        
+        $phone = request('phoneno');
+
+        for($i=0; $i<count($phone);$i++)
+        {
+            $p = new Phone();
+            $p->contact_id = $id;
+            $p->phone = $phone[$i];    // here add [$i]
+            $p->save();
+        }
         return redirect()->action('ViewContact@index', ['id' => $id])->with('status', 'Contact Added!');
     }
 
@@ -58,8 +69,6 @@ class AddContact extends Controller
         $contact = Contact::find($id);
         $contact->name = request('name');
         $contact->nick_name = request('nickname');
-        $contact->phone = request('phone');
-        $contact->alt_phone = request('phonealt');
         $contact->email = request('email');
         $contact->address = request('address');
         $contact->comments = request('comments');  
@@ -68,6 +77,15 @@ class AddContact extends Controller
         $contact->is_friend = request('known');
         $contact->save();
         $id = $contact->id;
+
+        $phone = request('phoneno');
+        for($i=0; $i<count($phone);$i++)
+        {
+            $p = new Phone();
+            $p->contact_id = $id;
+            $p->phone = $phone[$i];    // here add [$i]
+            $p->save();
+        }
         return redirect()->action('ViewContact@index', ['id' => $id])->with('status', 'Contact updated successfully!');
     }
 

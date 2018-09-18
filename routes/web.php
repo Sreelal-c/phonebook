@@ -15,22 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+
+Route::group(['prefix' => LaravelLocalization::setLocale(), 
+            'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], 
+function()
 {
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/add-contact', 'AddContact@index')->name('add-contact');
 Route::get('/edit-contact/{id}', 'AddContact@edit');
-Route::post('/edit-contact', 'AddContact@edit');
-Route::post('/edit-contact', 'AddContact@update');
+//Route::get('/edit-contact', 'AddContact@edit');
 Route::get('/view-contact/{id}','ViewContact@index');
 Route::get('/search','HomeController@search');
+});
+
+Route::post('/edit-contact', 'AddContact@update');
+Route::post('/add-contact', 'AddContact@store');
 Route::post('/upload',[
-        'uses' => 'AddContact@uploadImage',
-        'as' => 'contact.upload'
+    'uses' => 'AddContact@uploadImage',
+    'as' => 'contact.upload'
 ]);
 Route::get('contactImage/{filename}',[
     'uses'=> 'AddContact@getContactImage',
     'as' => 'contact.image'
 ]);
-    });

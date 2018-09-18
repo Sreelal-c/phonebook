@@ -15,4 +15,9 @@ class Contact extends Model
     //explicitly defines primary key and table name
     protected $primaryKey = 'id';
     protected $table = 'contacts';
+
+    public function phone()
+    {
+        return $this->hasMany('App\Phone');
+    }
 }

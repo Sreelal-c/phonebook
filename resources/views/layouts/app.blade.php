@@ -27,12 +27,13 @@
 <body>
         <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="{{ url('/') }}"><i class="ion-android-call"></i> PhoneBook</a>
+                    <a class="navbar-brand" href="{{ url('/') }}"><i class="ion-android-call"></i> {{ __('home.app') }}</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div id="navbarNavDropdown" class="navbar-collapse collapse">
                         <ul class="navbar-nav mr-auto">
+                        
                             <li class="nav-item active">
                                 <a class="nav-link" href="{{ url('/home') }}"><i class="ion-home"></i> Home <span class="sr-only">(current)</span></a>
                             </li>
@@ -40,15 +41,24 @@
                                 <a class="nav-link" href="{{ url('/add-contact') }}"><i class="ion-plus"></i> Add Contact</a>
                             </li>
                         </ul>
-                        <ul>
-    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <li>
-            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                {{ $properties['native'] }}
-            </a>
-        </li>
-    @endforeach
-</ul>
+                        <!-- language selector -->
+                        <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ios-globe"></i> Language
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                               
+                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                                
+                        @endforeach
+                        </div>
+                        </li>
+                        </ul>
+                        <!-- language selector ends -->
                         <ul class="navbar-nav">
                             @guest
                             <li class="nav-item">
@@ -125,6 +135,55 @@ success:function(data){
 $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
  
 </script>
+
+<script>
+        (function ($) {
+    $(function () {
+
+        var addFormGroup = function (event) {
+            event.preventDefault();
+
+            var $formGroup = $(this).closest('.form-group');
+            var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+            var $formGroupClone = $formGroup.clone();
+
+            $(this)
+                .toggleClass('btn-success btn-add btn-danger btn-remove')
+                .html('–');
+
+            $formGroupClone.find('input').val('');
+            $formGroupClone.insertAfter($formGroup);
+
+            var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+            if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+                $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+            }
+        };
+
+        var removeFormGroup = function (event) {
+            event.preventDefault();
+
+            var $formGroup = $(this).closest('.form-group');
+            var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+
+            var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+            if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+                $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+            }
+
+            $formGroup.remove();
+        };
+
+        var countFormGroup = function ($form) {
+            return $form.find('.form-group').length;
+        };
+
+        $(document).on('click', '.btn-add', addFormGroup);
+        $(document).on('click', '.btn-remove', removeFormGroup);
+
+    });
+})(jQuery);
+    </script>
  
 </body>
 </html>

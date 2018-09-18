@@ -13,15 +13,7 @@ return [
     |
     */
 
-    'addcontact' => 'Add Contact',
-    'name' => 'Name',
-    'email' => 'E-mail',
-    'phone' => 'Phone',
-    'address' => "Address",
-    'action' => "Actions",
-    'details' => "Contact Details",
-    'changephoto' => "Change Image",
-    'edit' => "Edit Contact",
-    'allcontacts' => "All Contacts",
-    'app' => "PhoneBook"
+    'previous' => '&laquo; മുമ്പത്തെ',
+    'next' => 'അടുത്തത് &raquo;',
+
 ];

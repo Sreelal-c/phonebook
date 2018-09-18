@@ -5,7 +5,8 @@
 
 <div class="card">
   <div class="card-header">
-    Contact Details
+    {{ __('home.details') }}
+     <a class="btn btn-primary float-right" href="/edit-contact/{{ $contact->id }}" >{{ __('home.edit') }}</a>
   </div>
   <div class="row" style="padding:10px;">
   <div class="col-sm-4">
@@ -18,7 +19,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $contact->name }}</h5>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Change Image
+                    {{ __('home.changephoto') }}
                 </button>
             </div>
         </div>
@@ -28,12 +29,16 @@
     <h5 class="card-title">{{ $contact->name }}</h5>
      <p class="card-text">{{$contact->job}}</p>
      <p class="card-text">{{$contact->email}}</p>
-     <p class="card-text">{{$contact->phone}}</p>
-     <p class="card-text">{{$contact->alt_phone}}</p>
+     {{--  <p class="card-text">{{$contact->phone}}</p>  --}}
+     @foreach ($contact->phone as $p)     
+        <p>{{$p->phone}}</p>
+    @endforeach
+     {{--  <p class="card-text">{{$contact->alt_phone}}</p>  --}}
      <p class="card-text"><a href="https://{{$contact->facebook}}">Facebook</a></p>
      <p class="card-text">{{$contact->address}}</p>
+     <hr>
      <p class="card-text">{{$contact->comments}}</p>
-    <a href="/edit-contact/{{ $contact->id }}" class="btn btn-primary">Edit Contact</a>
+   
   </div>
   </div>
   </div>

@@ -17,14 +17,14 @@ class CreateContactsTable extends Migration
             $table->increments('id');
             $table->string('name',75);
             $table->string('nick_name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->text('alt_phone');
+            $table->string('email');
+            
             $table->string('designation');
             $table->text('facebook');
             $table->text('address');
             $table->text('comments')->nullable();
             $table->integer('is_friend');
+            $table->softDeletes();
             $table->timestamps();      
         });
     }
