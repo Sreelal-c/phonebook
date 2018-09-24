@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use App\Phone;
 use DB;
 class HomeController extends Controller
 {
@@ -56,8 +57,19 @@ class HomeController extends Controller
                 ])->get();
             */
             // or condition
-            $contacts=DB::table('contacts')->where('name', 'LIKE','%'.$request->search.'%')
-            ->orwhere('phone', 'LIKE','%'.$request->search.'%')->get();
+            $searchString = $request->search;
+            $contacts = Contact::whereHas('phone', function ($query) use ($searchString){
+                $query->where('name', 'like', '%'.$searchString.'%');
+            })->get();
+
+            $phone = Contact::whereHas('phone', function($query) use($searchString) {
+                $query->where('phone', 'LIKE', '%'.$searchString.'%');
+            })->get();
+
+            $contacts = $contacts->merge($phone);
+            
+            // $contacts=DB::table('contacts')->where('name', 'LIKE','%'.$request->search.'%')
+            // ->orwhere('phone', 'LIKE','%'.$request->search.'%')->get();
             //count of total results
             //$count = DB::table('contacts')->where('name','LIKE','%'.$request->search."%")->count();
             $count=$contacts->count();
@@ -70,7 +82,11 @@ class HomeController extends Controller
             $output.='<tr>'.
             '<td>'.$i.'</td>'.
             '<td>'.$contact->name.'</td>'.
-            '<td>'.$contact->phone.'</td>'.
+            '<td>';
+            foreach ($contact->phone as $p)     
+                $output.=    $p->phone .'&nbsp' ;
+            $output.= '&nbsp'.
+        '</td>'.
             '<td>'.$contact->email.'</td>'.
             '<td>'.$contact->address.'</td>'.
             '<td>

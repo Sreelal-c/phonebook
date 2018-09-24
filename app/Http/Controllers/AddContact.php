@@ -53,7 +53,7 @@ class AddContact extends Controller
         {
             $p = new Phone();
             $p->contact_id = $id;
-            $p->phone = $phone[$i];    // here add [$i]
+            $p->phone = $phone[$i];   
             $p->save();
         }
         return redirect()->action('ViewContact@index', ['id' => $id])->with('status', 'Contact Added!');
@@ -83,7 +83,7 @@ class AddContact extends Controller
         {
             $p = new Phone();
             $p->contact_id = $id;
-            $p->phone = $phone[$i];    // here add [$i]
+            $p->phone = $phone[$i]; 
             $p->save();
         }
         return redirect()->action('ViewContact@index', ['id' => $id])->with('status', 'Contact updated successfully!');

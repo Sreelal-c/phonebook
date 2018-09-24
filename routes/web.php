@@ -27,7 +27,7 @@ Route::get('/add-contact', 'AddContact@index')->name('add-contact');
 Route::get('/edit-contact/{id}', 'AddContact@edit');
 //Route::get('/edit-contact', 'AddContact@edit');
 Route::get('/view-contact/{id}','ViewContact@index');
-Route::get('/search','HomeController@search');
+
 });
 
 Route::post('/edit-contact', 'AddContact@update');
@@ -40,3 +40,4 @@ Route::get('contactImage/{filename}',[
     'uses'=> 'AddContact@getContactImage',
     'as' => 'contact.image'
 ]);
+Route::get('/search','HomeController@search');

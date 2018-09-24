@@ -45,7 +45,7 @@
         <div class="form-group row multiple-form-group">
                       <label>Phone Numbers</label>
                       
-                        <input class="form-control" id="features" type="text"  name="phoneno[]" required>
+                        <input class="form-control" id="features" type="text"  name="phoneno[]" >
                         <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
 						</button></span>
                       

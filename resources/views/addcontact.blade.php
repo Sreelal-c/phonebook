@@ -54,14 +54,15 @@
                 <input type="text" class="form-control" id="phonealt" value="{{ old('phonealt') }}" name="phonealt" aria-describedby="phone2Help" placeholder="Alternate Numbers">
                 <small id="phone2Help" class="form-text text-muted">Enter Phone number with country code.</small>
             </div>  --}}
-             <div class="form-group row multiple-form-group">
+             <div class="form-group multiple-form-group">
                       <label>Phone Numbers</label>
-                      
+                      <div class="form-inline">
                         <input class="form-control" id="features" type="text" name="phoneno[]" required>
                         <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
 						</button></span>
+                     </div>
                       
-                    </div>
+            </div>
             <div class="form-group">
               <label for="job">Job/ Designation</label>
               <input type="text" class="form-control" value="{{ old('job') }}" id="job" name="job" aria-describedby="jobHelp" placeholder="Enter job/designation">

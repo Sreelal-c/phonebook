@@ -30,7 +30,7 @@
         <td>{{$row->name}}</td>
         <td><p>
             @foreach ($row->phone as $p)     
-                {{$p->phone}} &nbsp,
+                {{$p->phone}} &nbsp &nbsp 
             @endforeach 
             </p>
         </td>

@@ -34,7 +34,7 @@
         <p>{{$p->phone}}</p>
     @endforeach
      {{--  <p class="card-text">{{$contact->alt_phone}}</p>  --}}
-     <p class="card-text"><a href="https://{{$contact->facebook}}">Facebook</a></p>
+     <p class="card-text"><a href="{{$contact->facebook}}" target="_blank">Facebook</a></p>
      <p class="card-text">{{$contact->address}}</p>
      <hr>
      <p class="card-text">{{$contact->comments}}</p>
