@@ -15,7 +15,7 @@
   </div>
  @endif
 
-<form action="/add-contact" method="post">
+<form action="{{url('/add-contact')}}" method="post">
 {{ csrf_field() }}
 <div class="row  add-page">
     <div class="col-sm-5">
@@ -61,7 +61,7 @@
                         <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
 						</button></span>
                      </div>
-                      
+
             </div>
             <div class="form-group">
               <label for="job">Job/ Designation</label>
@@ -81,14 +81,14 @@
               </div>
                <div class="form-group">
                   <button type="submit" class="btn btn-primary">Add Contact</button>
-              </div>  
-  </div>   
+              </div>
+  </div>
 </div>
 <div class="row">
 <div class="col-sm-5">
-               
+
 </div>
-                   
+
 </div>
 
 </form>

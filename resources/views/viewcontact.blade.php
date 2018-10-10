@@ -30,7 +30,7 @@
      <p class="card-text">{{$contact->job}}</p>
      <p class="card-text">{{$contact->email}}</p>
      {{--  <p class="card-text">{{$contact->phone}}</p>  --}}
-     @foreach ($contact->phone as $p)     
+     @foreach ($contact->phone as $p)
         <p>{{$p->phone}}</p>
     @endforeach
      {{--  <p class="card-text">{{$contact->alt_phone}}</p>  --}}
@@ -38,7 +38,7 @@
      <p class="card-text">{{$contact->address}}</p>
      <hr>
      <p class="card-text">{{$contact->comments}}</p>
-   
+
   </div>
   </div>
   </div>
@@ -57,7 +57,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/upload" method="post" enctype="multipart/form-data">
+        <form action="{{url('/upload')}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
           <input type="hidden" name="id" value="{{$contact->id}}">
