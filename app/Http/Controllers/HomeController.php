@@ -84,16 +84,16 @@ class HomeController extends Controller {
 						'</td>' .
 						'<td>' . $contact->address . '</td>' .
 						'<td>
-                	<a href="/view-contact/' . $contact->id . '" class="btn btn-sm btn-primary tooltips"  data-toggle="tooltip" title="" data-original-title="Edit">
-                    <i class="ion-eye"></i>
+                	<a href="view-contact/' . $contact->id . '" class="btn btn-sm btn-primary tooltips"  data-toggle="tooltip" title="" data-original-title="Edit">
+                    <i class="ion-eye"></i>View
                 	</a>
                 	&nbsp;
-                    <a href="/edit-contact/' . $contact->id . '" class="btn btn-sm btn-warning tooltips"  data-toggle="tooltip" title="" data-original-title="Edit">
-                    <i class="ion-edit"></i>
+                    <a href="edit-contact/' . $contact->id . '" class="btn btn-sm btn-warning tooltips"  data-toggle="tooltip" title="" data-original-title="Edit">
+                    <i class="ion-edit"></i>Edit
                 	</a>
                 	&nbsp;
                 	<a href="#" class="btn btn-sm btn-danger tooltips"  data-toggle="tooltip" title="" data-original-title="Delete">
-                    <i class="ion-trash-a"></i>
+                    <i class="ion-trash-a"></i>Delete
                 	</a>
                 </td>' .
 							'</tr>';

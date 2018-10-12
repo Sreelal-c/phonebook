@@ -14,6 +14,7 @@
         <link href="{{ asset('css/socicon.css') }}" rel="stylesheet" type="text/css" media="all" />
         <link href="{{ asset('css/entypo.css') }}" rel="stylesheet" type="text/css" media="all" />
         <link href="{{ asset('css/theme.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     </head>
 
     <body>
@@ -86,7 +87,7 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow p-lg-0" href="http://example.com/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img alt="Image" src="{{ asset('img/avatar-male-3.jpg') }}" class="avatar avatar-xs" /> {{ Auth::user()->name }}
+                                        <img alt="Image" src="{{ asset('img/avatar-male-3.jpg') }}" class="avatar avatar-xs" /> {{ ucfirst(Auth::user()->name) }} <i class="fas fa-caret-down"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                                          @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -124,14 +125,14 @@
                         @guest
                             <h3> Welcome ! </h3>
                         @else
-                             <div class="col-md-6">
+                             <div  style="padding: 5px; class="col-md-6">
                                     <a href="{{ url('/add-contact') }}" class="btn btn-primary"><i class="icon-add-user mr-1"></i> Add Contact</a>
                                 </div>
                             <div class="col" style="padding: 5px;">
 
                                 <div class="col-md-6">
                                     <form class="form-inline col p-0 pl-md-2 pr-md-3">
-                                        <input class="form-control w-100" type="search" id="search" placeholder="Search" aria-label="Search">
+                                        <input class="form-control w-100" type="search" id="search" placeholder="Search Contacts Here" aria-label="Search">
                                     </form>
                                 </div>
                             </div>

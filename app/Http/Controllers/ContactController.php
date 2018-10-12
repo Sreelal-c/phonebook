@@ -24,6 +24,7 @@ class ContactController extends Controller {
 	}
 
 	public function store() {
+
 		$this->validate(request(), [
 			'name' => 'required',
 			'phoneno' => 'required',
@@ -32,12 +33,10 @@ class ContactController extends Controller {
 
 		$contact = new Contact;
 
-		$contact->name = request('name');
+		$contact->name = ucfirst(request('name'));
 		$contact->nick_name = request('nickname');
-		//$contact->phone = request('phone');
-		//$contact->alt_phone = request('phonealt');
 		$contact->email = request('email');
-		$contact->address = request('address');
+		$contact->address = ucfirst(request('address'));
 		$contact->comments = request('comments');
 		$contact->designation = request('job');
 		$contact->facebook = request('facebook');
@@ -47,12 +46,17 @@ class ContactController extends Controller {
 
 		$phone = request('phoneno');
 
+		// inserting phone number array
 		for ($i = 0; $i < count($phone); $i++) {
 			$p = new Phone();
-			$p->contact_id = $id;
-			$p->phone = $phone[$i];
-			$p->save();
+			// inserting all non null values
+			if ($phone[$i] != "") {
+				$p->contact_id = $id;
+				$p->phone = $phone[$i];
+				$p->save();
+			}
 		}
+
 		return redirect()->action('ViewContact@index', ['id' => $id])->with('status', 'Contact Added!');
 	}
 
@@ -62,8 +66,10 @@ class ContactController extends Controller {
 	}
 
 	public function update() {
+		// find row by its primary_key
 		$id = request('id');
 		$contact = Contact::find($id);
+		// updating all feilds
 		$contact->name = request('name');
 		$contact->nick_name = request('nickname');
 		$contact->email = request('email');
@@ -76,9 +82,13 @@ class ContactController extends Controller {
 		$id = $contact->id;
 
 		$phone = request('phoneno');
+		// find the phone modal with contact_id foreign key
 		$p = Phone::where('contact_id', '=', $id);
+		//delete the existing data
 		$p->delete();
+		//insert the new values
 		for ($i = 0; $i < count($phone); $i++) {
+			// insert all non empty values
 			if ($phone[$i] != "") {
 				$p = new Phone();
 				$p->contact_id = $id;
@@ -90,6 +100,7 @@ class ContactController extends Controller {
 	}
 
 	public function uploadImage(Request $request) {
+
 		$id = request('id');
 		$file = $request->file('image');
 		$contact = Contact::find($id);
@@ -103,6 +114,7 @@ class ContactController extends Controller {
 	}
 
 	public function getContactImage($filename) {
+
 		$file = Storage::disk('local')->get($filename);
 		return new Response($file, 200);
 	}

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <br>
-<a href="{{url('/home')}}" class="btn btn-success add-btn"><i class="ion-android-call"></i> All Contacts</a>
+<a href="{{url('/home')}}" class="btn btn-success add-btn"><i class="ion-android-call"></i> < All Contacts</a>
 <hr>
 @if(count($errors))
   <div class="form-group">
