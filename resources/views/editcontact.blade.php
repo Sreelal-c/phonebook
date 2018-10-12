@@ -15,7 +15,7 @@
   </div>
  @endif
 
-<form method="post" action="/edit-contact">  
+<form method="post" action="{{url('/edit-contact')}}">
 {{ csrf_field() }}
 <div class="row  add-page">
     <div class="col-sm-5">
@@ -25,7 +25,7 @@
                         <input type="text" value="{{$contact->name}}" class="form-control" id="name" value="{{ old('name') }}"  name="name" aria-describedby="nameHelp" placeholder="Enter Full Name">
                         <small id="nameHelp" class="form-text text-muted">Enter the full name</small>
                 </div>
-                
+
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input type="email" value="{{$contact->email}}" class="form-control" id="exampleInputEmail1" value="{{ old('email') }}" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -42,24 +42,24 @@
                         <input value="{{$contact->nickname}}" type="text" class="form-control" value="{{ old('name') }}" id="nickname" name="nickname" aria-describedby="nicknameHelp" placeholder="Enter Nick Name">
                         <small id="nicknameHelp" class="form-text text-muted">Enter the Nick name</small>
             </div>
-        <div class="form-group row multiple-form-group">
-                      <label>Phone Numbers</label>
-                      
-                        <input class="form-control" id="features" type="text"  name="phoneno[]" >
-                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
-						</button></span>
-                      
-        </div>
+
         @foreach($contact->phone as $row)
-           <div class="form-group row multiple-form-group">
-                      <label>Phone Numbers</label>
-                      
-                        <input class="form-control" id="features" type="text" value="{{$row->phone}}" name="phoneno[]" required>
-                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+
-						</button></span>
-                      
+           <div class="form-group multiple-form-group">
+                      <label>Phone:</label>
+                        <div class="form-inline">
+                          <input class="form-control" id="features" type="text" value="{{$row->phone}}" name="phoneno[]" required>
+                          <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">-</button></span>
+                        </div>
+
             </div>
-            @endforeach
+          @endforeach
+            <div class="form-group multiple-form-group">
+                      <label>Phone:</label>
+                        <div class="form-inline ">
+                          <input class="form-control" id="features" type="text"  name="phoneno[]" >
+                          <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">+</button></span>
+                        </div>
+          </div>
             <div class="form-group">
               <label for="job">Job/ Designation</label>
               <input type="text" value="{{$contact->job}}" class="form-control" value="{{ old('job') }}" id="job" name="job" aria-describedby="jobHelp" placeholder="Enter Job/Designation">
@@ -78,8 +78,8 @@
               </div>
                <div class="form-group">
                   <button type="submit" class="btn btn-primary">Save Changes</button>
-              </div>  
-  </div>   
+              </div>
+  </div>
 </div>
 <div class="row">
 <div class="col-sm-5">
@@ -88,7 +88,7 @@
                       <textarea  name="comments" class="form-control" id="comments" placeholder="Comments">{{$contact->comments}}</textarea>
                 </div>
 </div>
-                   
+
 </div>
 
 </form>

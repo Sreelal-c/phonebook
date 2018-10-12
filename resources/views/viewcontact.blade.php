@@ -6,7 +6,7 @@
 <div class="card">
   <div class="card-header">
     {{ __('home.details') }}
-     <a class="btn btn-primary float-right" href="/edit-contact/{{ $contact->id }}" >{{ __('home.edit') }}</a>
+     <a class="btn btn-primary float-right" href="{{url('/edit-contact')}}/{{ $contact->id }}" >{{ __('home.edit') }}</a>
   </div>
   <div class="row" style="padding:10px;">
   <div class="col-sm-4">

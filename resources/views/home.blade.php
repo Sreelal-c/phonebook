@@ -50,12 +50,12 @@
                                                 @if(Storage::disk('local')->has($row->name.'-'.$row->id.'.jpg'))
                                                     <img class="avatar" src="{{ route('contact.image',['filename' => $row->name.'-'.$row->id.'.jpg' ]) }}" alt="Card image cap" >
                                                 @else
-                                                    <img class="avatar" src="{{ asset('img/eggshell.png') }}" alt="Card image cap" >
+                                                    <img class="avatar" src="{{ asset('img/avatar-male-1.jpg') }}" alt="Card image cap" >
                                                 @endif
 
                                                 <div class="media-body">
                                                     <span class="h6 mb-0">{{$row->name}}
-                                                        <span class="badge badge-secondary">Firend</span>
+                                                        @if($row->is_friend == 1)<span class="badge badge-secondary">Firend</span> @endif
                                                     </span>
                                                     <span class="text-muted">{{$row->email}}</span>
                                                 </div>

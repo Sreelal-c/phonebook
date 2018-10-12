@@ -14,6 +14,7 @@ class ContactController extends Controller {
 	 *
 	 * @return void
 	 */
+
 	public function __construct() {
 		$this->middleware('auth');
 	}
@@ -75,11 +76,15 @@ class ContactController extends Controller {
 		$id = $contact->id;
 
 		$phone = request('phoneno');
+		$p = Phone::where('contact_id', '=', $id);
+		$p->delete();
 		for ($i = 0; $i < count($phone); $i++) {
-			$p = new Phone();
-			$p->contact_id = $id;
-			$p->phone = $phone[$i];
-			$p->save();
+			if ($phone[$i] != "") {
+				$p = new Phone();
+				$p->contact_id = $id;
+				$p->phone = $phone[$i];
+				$p->save();
+			}
 		}
 		return redirect()->action('ViewContact@index', ['id' => $id])->with('status', 'Contact updated successfully!');
 	}
